@@ -10,6 +10,17 @@ export interface Event {
   organizer: string
 }
 
+export interface EventItem {
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  petAllowed: boolean
+  organizer: string
+}
+
 export interface MessageState {
   message: string
 }
