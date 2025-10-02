@@ -7,8 +7,8 @@ import { useMessageStore } from '@/stores/message'
 
 const organization = ref<Organizer>({
     // id: '',
-    organization: '',
-    address: ''
+    name: '',
+    // address: ''
 })
 const router = useRouter()
 const store = useMessageStore()
@@ -17,8 +17,8 @@ function saveOrganization() {
     .then((response) => {
       // Clear the form after successful submission
       organization.value = {
-        organization: '',
-        address: ''
+        name: '',
+        // address: ''
       }
       
       router.push({ name: 'add-organization', params: { id: response.data.id } })
@@ -38,11 +38,11 @@ function saveOrganization() {
         <h1>Create an Event</h1>
         <form @submit.prevent="saveOrganization">
             <label>Organization</label>
-            <input v-model="organization.organization" type="text" placeholder="Organization" class="field" />
+            <input v-model="organization.name" type="text" placeholder="Organization" class="field" />
 
-            <h3>Address</h3>
+            <!-- <h3>Address</h3>
             <label>Where is the Organization address</label>
-            <input v-model="organization.address" type="text" placeholder="Address" class="field" />
+            <input v-model="organization.address" type="text" placeholder="Address" class="field" /> -->
 
 
             <button class="button" type="submit">Submit</button>
