@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import type { Event } from '@/types'
-import { ref } from 'vue'
+import type { Event, Organizer } from '@/types'
+import { onMounted, ref } from 'vue'
 import EventService from '@/services/EventService'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
+import BaseInput from '@/components/BaseInput.vue'
+import OrganizationService from '@/services/OrganizationService'
 
 const event = ref<Event>({
     // id: '',
@@ -34,25 +36,44 @@ function saveEvent() {
       router.push({ name: 'network-error-view' })
     })
 }
+
+const organizers = ref<Organizer[]>([])
+onMounted(() => {
+    OrganizationService.getOrganizers()
+    .then((response) => {
+        organizers.value = response.data
+    })
+    .catch(() => {
+        router.push({ name: 'network-error-view' })
+    })
+})
 </script>
 
 <template>
     <div>
         <h1>Create an Event</h1>
         <form @submit.prevent="saveEvent">
-            <label>Category</label>
-            <input v-model="event.category" type="text" placeholder="Category" class="field" />
+            <BaseInput v-model="event.category" type="text" label="Category" />
+            <h3>Name & describe your events</h3>
 
-            <h3>Name & describe your event</h3>
-            <label>Title</label>
-            <input v-model="event.title" type="text" placeholder="Title" class="field" />
+            <BaseInput v-model="event.title" type="text" label="Title" />
 
-            <label>Description</label>
+            <!-- <label>Description</label>
             <input v-model="event.description" type="text" placeholder="Description" class="field" />
 
             <h3>Where is your event?</h3>
             <label>Location</label>
-            <input v-model="event.location" type="text" placeholder="Location" class="field" />
+            <input v-model="event.location" type="text" placeholder="Location" class="field" /> -->
+
+            <label>Location</label>
+            <BaseInput v-model="event.location" type="text" label="Location" />
+
+            <h3>Who is your organizations?</h3>
+            <label>Select an Organizer</label>
+            <select v-model="event.organizer.id">
+                <option v-for="option in organizers" :key="option.id" :value="option.id" :selected="option.id === event.organizer.id">
+                {{ option.name }}</option>
+            </select>
 
             <button class="button" type="submit">Submit</button>
         </form>

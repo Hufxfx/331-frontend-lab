@@ -11,13 +11,16 @@ const apiClient = axios.create({
 })
 
 export default {
-  getOrganizations(perPage: Number, page: Number) {
-    return apiClient.get('/organizations?_limit=' + perPage + '&_page=' + page)
-  },
-  getOrganization(id: number) {
-    return apiClient.get('/organizations/' + id)
-  },
-  saveOrganization(organization: Organizer) {
-    return apiClient.post('/organizer', organization)
-    }
+  // getOrganizations(perPage: Number, page: Number) {
+  //   return apiClient.get('/organizations?_limit=' + perPage + '&_page=' + page)
+  // },
+  // getOrganization(id: number) {
+  //   return apiClient.get('/organizations/' + id)
+  // },
+  // saveOrganization(organization: Organizer) {
+  //   return apiClient.post('/organizer', organization)
+  //   }
+  getOrganizers() {
+    return apiClient.get('/organizers')
+  }
 }
