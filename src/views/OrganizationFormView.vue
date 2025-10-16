@@ -8,7 +8,7 @@ import { useMessageStore } from '@/stores/message'
 const organization = ref<Organizer>({
     // id: '',
     name: '',
-    // address: ''
+    
 })
 const router = useRouter()
 const store = useMessageStore()
@@ -43,7 +43,6 @@ function saveOrganization() {
             <!-- <h3>Address</h3>
             <label>Where is the Organization address</label>
             <input v-model="organization.address" type="text" placeholder="Address" class="field" /> -->
-
 
             <button class="button" type="submit">Submit</button>
         </form>

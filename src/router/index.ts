@@ -97,7 +97,12 @@ const router = createRouter({
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: NotFoundView
-    }
+    },
+    {
+      path: '/organization-list-view',
+      name: 'organization-list-view',
+      component: AboutView
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
