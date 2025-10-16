@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import BaseInput from '@/components/BaseInput.vue'
 import OrganizationService from '@/services/OrganizationService'
+import BaseSelect from '@/components/BaseSelect.vue'
 
 const event = ref<Event>({
     // id: '',
@@ -70,10 +71,7 @@ onMounted(() => {
 
             <h3>Who is your organizations?</h3>
             <label>Select an Organizer</label>
-            <select v-model="event.organizer.id">
-                <option v-for="option in organizers" :key="option.id" :value="option.id" :selected="option.id === event.organizer.id">
-                {{ option.name }}</option>
-            </select>
+            <BaseSelect v-model="event.organizer.id" :options="organizers" label="Organizer" />
 
             <button class="button" type="submit">Submit</button>
         </form>
