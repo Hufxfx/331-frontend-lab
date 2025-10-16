@@ -7,6 +7,7 @@ import { useMessageStore } from '@/stores/message'
 import BaseInput from '@/components/BaseInput.vue'
 import OrganizationService from '@/services/OrganizationService'
 import BaseSelect from '@/components/BaseSelect.vue'
+import ImageUpload from '@/components/ImageUpload.vue'
 
 const event = ref<Event>({
     // id: '',
@@ -20,7 +21,8 @@ const event = ref<Event>({
     organizer: {
         id: 0,
         name: ''
-    }
+    },
+    images: []
 })
 const router = useRouter()
 const store = useMessageStore()
@@ -73,6 +75,9 @@ onMounted(() => {
             <label>Select an Organizer</label>
             <BaseSelect v-model="event.organizer.id" :options="organizers" label="Organizer" />
 
+
+            <h3>The image of the Event</h3>
+            <ImageUpload v-model="event.images" />
             <button class="button" type="submit">Submit</button>
         </form>
 

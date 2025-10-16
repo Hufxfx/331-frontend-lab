@@ -8,6 +8,7 @@ export interface Event {
   time: string
   petAllowed: boolean
   organizer: Organizer
+  images: string[]
 }
 
 export interface EventItem {
