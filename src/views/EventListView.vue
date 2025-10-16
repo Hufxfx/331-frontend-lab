@@ -5,6 +5,7 @@ import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
 
 import { useRouter } from 'vue-router'
+import BaseInput from '@/components/BaseInput.vue'
 
 const router = useRouter()
 const events = ref<Event[] | null>(null)
@@ -33,9 +34,9 @@ onMounted(() => {
   })
 })
 
-//Lab09
+//Lab10
 const keyword = ref('')
-function updateKeyword () {
+function updateKeyword (value: string) {
   let queryFuction;
   if (keyword.value === '') {
     queryFuction = EventService.getEvents(3, page.value)
@@ -58,18 +59,18 @@ function updateKeyword () {
   <!-- new element -->
   <div class="flex flex-col items-center">
     <div class="w-64">
-      <Input v-model="keyword" label="Search..." @input="updateKeyword" />
+      <BaseInput v-model="keyword" label="Search..." @input="updateKeyword" />
       <br>
       <br>
     </div>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <div class="pagination">
-      <RouterLinkß
+      <RouterLink
         id="page-prev"
         :to="{ name: 'event-list-view', query: { page: page - 1 } }"
         rel="prev"
         v-if="page != 1"
-        >&#60; Prev Page</RouterLinkß
+        >&#60; Prev Page</RouterLink
       >
 
       <RouterLink
